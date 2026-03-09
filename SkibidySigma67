@@ -27,12 +27,14 @@
 * Create User Personas (Name, Age, Role, Challenges, Thoughts, Goals, Expectations)
 * SWOT analysis (strengths, weaknesses, opportunities and Threats)
 * Functional and Non-Functional Requiremnets(3 of each e.g User login, booking calender. admin dashboard and maintainance, performance, security)
-* Risk Mitigation (Risk, Impact Level, Likelihood, Mitigation, Contingency )
+* Risk Mitigation (Risk, Impact Level, Likelihood, Mitigation, Contingency ) Move to justification
 
 ### Justification
 * Meeting Client and User needs
 * Scalability and Future Improvements
 * Legal and Regulatory Compliance
+add user stories as a i want so tjat acceptance criteria 
+decomposition of requirments draw.io
 
 
 # Activity B
