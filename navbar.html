@@ -1,0 +1,64 @@
+ ### HTML ###     
+     <link rel="stylesheet" href="CSS/Styles.css">
+        <title>Home Page</title>
+    </head>
+ 
+    <body style="size:fill">
+        <nav class ="navbar">
+            <img class ="Logo"src="Images/Student Portal Logo.png" alt="Logo">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="About Us.html">About Us</a></li>
+                <li><a href="Contact Us.html">Contact Us</a></li>
+                <li><a href="ResourceView.html">Resource View</a></li>
+                <li><a href="Cafe.html">Cafe</a></li>
+            </ul>
+        </nav>
+
+### NavBar CSS ### 
+
+.navbar {
+    background-color: hsl(0, 0%, 0%);
+}
+ 
+ 
+.navbar ul {
+    list-style: none;          /* removes bullet points */
+    padding: 50;
+    margin: 0;
+    display: flex;             /* not inline-flex */
+    justify-content: center;   /* keeps items close together, not everywhere through bar */
+    gap: 0px;
+    margin-left: 5px;              /* adjust space between words */
+}
+ 
+ 
+.navbar li {
+    list-style: none;          /* double ensure no bullets */
+}
+ 
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    text-align: center;
+    transition: ease-out 0.2s;
+}
+ 
+.navbar a:hover {
+    background-color: rgb(123, 60, 223);
+}
+ 
+ 
+.Logo {
+    width: 54px;
+    height: 54px;
+ 
+}
+ 
+ 
+body {
+    margin: 0px;
+}
+ 
