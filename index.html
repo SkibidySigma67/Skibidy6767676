@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jack Hartfield Sports Club</title>
+        <link rel="stylesheet" href="../static/style.css">
+    </head>
+
+    <body>
+        <body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../static/images/Logo.jpg">
+        </div>
+
+        <ul>
+            <li><a href="/Home">Home</a></li> 
+            <li><a href="Fitness_Center">Fitness Center</a></li> 
+            <li><a href="/Membership">Membership</a></li> 
+            <li><a href="/Room_Hire">Room Hire</a></li> 
+            <li><a href="/Login">Login</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Jack Hartfield Sports Club</h1>
+        <button class="cta">Find Out More!</button>
+    </section>
+
+    <section class="about-section">
+
+    <div class="about-text fade-in">
+        <h1>Welcome to Jack Hartfield Sports Club</h1>
+        <p>
+            Here at Jack Hartfield Sports Club we welcome everyone from our local community. 
+            Jack Hartfield Sports Club is a welcoming community space in the heart of Acklam, 
+            built on the legacy of John Gatenby “Jack” Hatfield - the Olympic swimmer and water polo 
+            player who won three medals at the 1912 Stockholm Games and went on to become one of 
+            Teesside’s most respected sporting figures. The modern club grew from land originally 
+            connected to the old Middlesbrough Employees Sports Club, later rebuilt and officially 
+            reopened in 2007 as the Jack Hatfield Sports and Social Club, continuing his family’s 
+            long tradition of supporting local sport and community life. Today, the club offers a 
+            friendly fitness centre, lively weekly events, social activities, and flexible room‑hire 
+            facilities, all designed to give both new and long‑standing members the best possible 
+            experience!
+        </p>
+    </div>
+
+    <div class="about-gallery fade-in">
+        <div class="slider">
+            <img src="../static/images/Clubhouse2.jpg" alt="clubhouse2">
+            <img src="../static/images/InsideClub.jpg" alt="Inside">
+            <img src="../static/images/seating1.jpg" alt="seating1">
+            <img src="../static/images/seatingWedding.jpg" alt="weddingseating">
+        </div>
+
+        <button class="slide-btn prev">‹</button>
+        <button class="slide-btn next">›</button>
+    </div>
+    </section>
+    
+    <section class="about-section">
+        <div class="about-membership fade-in">
+            <h1>Memberships</h1>
+
+            <p>
+                Becoming a member of Jack Hartfield Sports Club is simple and affordable. 
+                A one-off joining fee of £20 is required, followed by a first-year membership 
+                cost of £5, bringing the total initial payment to £25. After your first year, 
+                the annual renewal fee remains just £5.
+            </p>
+
+            <p>
+                Annual subscriptions are due on the 1st of February, although payments can be 
+                made at any time throughout the month. Please note that failure to renew within 
+                this period may result in restricted access to club facilities.
+            </p>
+
+            <p>
+                All membership payments must be made directly to Secretary Mick Mead. Payments 
+                are accepted only on Wednesday, Friday, and Saturday evenings between 8:00pm 
+                and 9:00pm.
+            </p>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="about-RoomHire fade-in">
+            <h1>Room-Hire</h1>
+        <p>
+            Our function room comfortably seats up to 110 guests and is available for hire 
+            from 10:00am until 11:00pm. Over the years, we’ve hosted a wide range of events 
+            including weddings, funerals, birthday celebrations, engagements, children’s parties, 
+            clairvoyant evenings, games nights, race nights, rokas, community meetings, 
+            Women’s Institute gatherings, and book launches.
+        </p>
+
+        <p>
+            Please note that the function room is unavailable on Wednesday, Friday, and Saturday 
+            evenings due to regular club activities. We are also unable to host 18th or 21st 
+            birthday parties.
+        </p>
+
+        <p>
+            Room hire is priced at £70 for non‑members, £100 for commercial bookings, and is 
+            completely free for members.
+        </p>
+
+        </div>
+
+    </section>
+
+    <section class="about-section">
+        <div class="about-FitnessCenter fade-in">
+        <h1>Fitness Center</h1>
+        <p>
+            The fitness room provides a friendly and supportive environment for anyone looking 
+            to begin or continue their fitness journey, welcoming both male and female members. 
+            While we do not offer personal training sessions, the room is supported by two 
+            accredited fitness instructors who are available to deliver induction sessions and 
+            offer advice and guidance on training methods and programme planning.
+        </p>
+
+        <p>
+            The room is equipped with a range of high‑quality cardiovascular and strength‑training 
+            stations, including both cable‑resistant machines and free‑weight options. This variety 
+            ensures members can enjoy a balanced and effective workout tailored to their needs.
+        </p>
+
+        <p>
+            Changing and shower facilities are available for both genders, and lockers are provided 
+            with a returnable £1.00 coin deposit for secure storage during your visit.
+        </p>
+
+        <p>
+            Although the fitness room is managed entirely by volunteers, membership fees play an 
+            important role in maintaining the equipment and contributing to the wider running of 
+            the club. Your support helps us keep the facilities safe, functional, and welcoming 
+            for everyone.
+        </p>
+
+        </div>
+
+    </section>
+    <footer style="background-color: black; color: white;">
+        <p>Made by team at Ghost Innovations LTD</p>
+    </footer>
+
+    <script src="../static/Fade.js"></script>
+</body>
+</html>
+
+### CSS ### 
+/* Fullscreen hero background */
+.hero {
+    height: 100vh;
+    background: url("../static/images/Clubhouse.jpg") center/cover no-repeat;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 80px;
+    color: white;
+}
+
+/* Dark duotone + blur overlay */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55); /* dark overlay */
+    backdrop-filter: blur(6px);      /* blur effect */
+    z-index: 0;
+}
+
+/* Ensure text + button appear above overlay */
+.hero h1,
+.hero .cta {
+    position: relative;
+    z-index: 1;
+}
+
+/* Heading styling */
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    max-width: 500px;
+}
+
+/* Button styling */
+.cta {
+    background-color: #752071;
+    color: white;
+    padding: 15px 28px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.2s ease-out;
+}
+
+.cta:hover {
+    background-color: #9a2c96;
+}
+
+.about-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* centers the images vertically */
+    padding: 60px 80px;
+    gap: 40px;
+}
+
+
+.about-text {
+    flex: 1;
+    color: black;
+}
+
+.about-text h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
