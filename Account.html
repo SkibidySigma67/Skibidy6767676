@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Account | Forest Grove</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <title>My Account | Forest Grove</title>
     <style>
         * {
             margin: 0;
@@ -13,176 +12,121 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: #e8f0e6;
             color: #1e3a2f;
-            line-height: 1.4;
-            padding: 2rem;
         }
 
-        /* Main container */
-        .account-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 32px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-        }
-
-        /* Dashboard Layout */
-        .dashboard {
+        /* Simple Navbar */
+        .navbar {
+            background: #1e4a3a;
+            padding: 1rem 2rem;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
-            min-height: 100vh;
-        }
-
-        /* Sidebar - Forest theme */
-        .sidebar {
-            flex: 1;
-            min-width: 280px;
-            background: linear-gradient(135deg, #1e4a3a 0%, #0f3b2c 100%);
-            padding: 2rem 1.5rem;
-            color: #ffffff;
-        }
-
-        /* Username Section */
-        .user-section {
-            margin-bottom: 2.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .user-section h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.5px;
-            color: #ffffff;
-        }
-
-        .user-badge {
-            font-size: 0.85rem;
-            color: #b8dfc6;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 0.5rem;
-        }
-
-        /* Navigation Menu */
-        .nav-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0.9rem 1.2rem;
-            border-radius: 16px;
-            font-weight: 500;
-            color: #e0f0e6;
-            transition: 0.2s;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            width: 100%;
-            text-align: left;
-            font-size: 1rem;
-            font-family: inherit;
-        }
-
-        .nav-item i {
-            font-style: normal;
-            font-weight: 500;
-            font-size: 1.2rem;
-            width: 28px;
-        }
-
-        .nav-item.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        .nav-item:not(.active):hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 3;
-            background: #fafef7;
-            padding: 2rem 2.5rem;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.3px;
-            border-left: 5px solid #2e7d64;
-            padding-left: 1rem;
-            color: #1e3a2f;
-        }
-
-        /* Stats Cards */
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #2e7d64 0%, #236b54 100%);
-            padding: 1.8rem;
-            border-radius: 24px;
-            color: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .stat-number {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 0.95rem;
-            opacity: 0.95;
-            font-weight: 500;
-        }
-
-        /* Order Cards */
-        .orders-grid {
-            display: flex;
-            flex-direction: column;
             gap: 1rem;
         }
 
-        .order-card {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 1.2rem 1.5rem;
-            border: 1px solid #e2efe8;
-            transition: 0.2s;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        .logo {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
 
-        .order-card:hover {
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Welcome Box */
+        .welcome {
+            background: #2e7d64;
+            padding: 1.5rem;
+            border-radius: 16px;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .welcome h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Info Cards */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border: 1px solid #d4e4dc;
+        }
+
+        .card h3 {
+            color: #2e7d64;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2efe8;
+        }
+
+        .info-row {
+            display: flex;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-label {
+            font-weight: 600;
+            width: 100px;
+            color: #7f9e8f;
+        }
+
+        .info-value {
+            flex: 1;
+        }
+
+        /* Orders Section */
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .order-item {
+            background: #fafef7;
+            border: 1px solid #e2efe8;
+            border-radius: 12px;
+            padding: 1rem;
+            transition: 0.2s;
+        }
+
+        .order-item:hover {
             border-color: #c8e0d4;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            background: #ffffff;
         }
 
         .order-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
@@ -190,34 +134,34 @@
         .order-id {
             font-weight: 700;
             color: #2e7d64;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .order-date {
-            color: #7f9e8f;
-            font-size: 0.85rem;
+            color: #9ec0ae;
+            font-size: 0.8rem;
         }
 
         .order-items {
-            margin: 0.5rem 0;
             color: #4a6b5e;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            margin: 0.5rem 0;
         }
 
         .order-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 0.75rem;
+            margin-top: 0.5rem;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
 
         .order-status {
             display: inline-block;
-            padding: 0.3rem 1rem;
+            padding: 0.2rem 0.8rem;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
         }
 
@@ -231,515 +175,190 @@
             color: #4a8b6e;
         }
 
-        .status-pending {
-            background: #fff0e5;
-            color: #c97e5a;
-        }
-
         .order-total {
             font-weight: 700;
             color: #1e5a48;
-            font-size: 1rem;
         }
 
-        /* Loyalty Stamps Section */
-        .loyalty-section {
-            margin-top: 1rem;
-        }
-
-        .stamps-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.2rem;
-            margin: 1.5rem 0;
-            align-items: center;
-        }
-
-        .stamp-card {
-            background: #f0f7f3;
-            border-radius: 48px;
-            padding: 0.6rem 1.4rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            border: 1px solid #c8e0d4;
-        }
-
-        .stamp-icon {
-            font-size: 1.8rem;
-        }
-
-        .stamp-count {
-            font-weight: 800;
-            font-size: 1.6rem;
-            color: #2e7d64;
-        }
-
-        .progress-message {
-            background: #eef7f2;
-            border-radius: 20px;
-            padding: 0.7rem 1.2rem;
-            font-size: 0.9rem;
-            color: #4a6b5e;
-            border-left: 3px solid #2e7d64;
-        }
-
-        .stamps-grid {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            margin: 1.5rem 0;
-        }
-
-        .stamp {
-            width: 55px;
-            height: 55px;
-            background: #f5f5f5;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            border: 2px solid #e2e8e2;
-        }
-
-        .stamp.earned {
-            background: #e0f5ee;
-            border-color: #2e7d64;
-            color: #2e7d64;
-        }
-
-        .stamp.earned::before {
-            content: "🌿";
-        }
-
-        .stamp:not(.earned)::before {
-            content: "🍃";
-            opacity: 0.5;
-        }
-
-        /* Edit Account Form */
-        .edit-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            max-width: 500px;
-            margin-top: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .form-group label {
-            font-weight: 600;
+        .empty-orders {
+            text-align: center;
+            padding: 2rem;
+            color: #9ec0ae;
             font-size: 0.85rem;
-            color: #2e7d64;
         }
 
-        .form-group input,
-        .form-group select {
-            padding: 12px 16px;
-            border-radius: 24px;
-            border: 1px solid #c8e0d4;
-            font-family: inherit;
-            font-size: 0.95rem;
-            background: #ffffff;
-            transition: 0.2s;
+        /* Stats Row */
+        .stats-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
 
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #2e7d64;
-            box-shadow: 0 0 0 3px rgba(46, 125, 100, 0.1);
-        }
-
-        /* Buttons */
-        .btn-primary {
-            background: #2e7d64;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            color: white;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: 0.2s;
-            width: fit-content;
-        }
-
-        .btn-primary:hover {
-            background: #236b54;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid #c8e0d4;
-            padding: 10px 22px;
-            border-radius: 40px;
-            color: #2e7d64;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-secondary:hover {
-            background: #e0f5ee;
-            border-color: #2e7d64;
-        }
-
-        hr {
-            margin: 1.5rem 0;
-            border: none;
-            border-top: 1px solid #e2efe8;
-        }
-
-        .info-note {
-            background: #f0f7f3;
+        .stat-box {
+            background: white;
+            flex: 1;
             padding: 1rem;
-            border-radius: 16px;
-            margin-top: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #d4e4dc;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2e7d64;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #7f9e8f;
+        }
+
+        /* Flash Messages */
+        .flash {
+            padding: 0.7rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
             font-size: 0.85rem;
-            color: #4a8b6e;
-            border-left: 3px solid #2e7d64;
         }
 
-        /* Section visibility (CSS-only tabs) */
-        .section-toggle {
-            display: none;
+        .flash.success {
+            background: #e0f5ee;
+            color: #2e7d64;
         }
 
-        .section {
-            display: none;
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #9ec0ae;
+            font-size: 0.75rem;
+            border-top: 1px solid #d4e4dc;
+            margin-top: 2rem;
         }
 
-        #toggle-past:checked ~ .dashboard #past-section,
-        #toggle-upcoming:checked ~ .dashboard #upcoming-section,
-        #toggle-loyalty:checked ~ .dashboard #loyalty-section,
-        #toggle-edit:checked ~ .dashboard #edit-section {
-            display: block;
-        }
-
-        #toggle-past:checked ~ .dashboard .sidebar label[for="toggle-past"],
-        #toggle-upcoming:checked ~ .dashboard .sidebar label[for="toggle-upcoming"],
-        #toggle-loyalty:checked ~ .dashboard .sidebar label[for="toggle-loyalty"],
-        #toggle-edit:checked ~ .dashboard .sidebar label[for="toggle-edit"] {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        .sidebar .nav-item {
-            cursor: pointer;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-            .dashboard {
+        @media (max-width: 600px) {
+            .info-row {
                 flex-direction: column;
             }
-            .main-content {
-                padding: 1.5rem;
+            .info-label {
+                width: auto;
+                margin-bottom: 0.2rem;
             }
-            .section-title {
-                font-size: 1.5rem;
+            .stats-row {
+                flex-direction: column;
             }
-            .stats-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Empty state */
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: #9ec0ae;
-            font-size: 0.95rem;
         }
     </style>
 </head>
 <body>
-<div class="account-container">
-    <!-- Hidden radio buttons for CSS-only tab switching -->
-    <input type="radio" name="section" id="toggle-past" class="section-toggle" checked>
-    <input type="radio" name="section" id="toggle-upcoming" class="section-toggle">
-    <input type="radio" name="section" id="toggle-loyalty" class="section-toggle">
-    <input type="radio" name="section" id="toggle-edit" class="section-toggle">
+    <nav class="navbar">
+        <div class="logo">🌿 Forest Grove</div>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </nav>
 
-    <div class="dashboard">
-        <!-- Sidebar - Forest Theme -->
-        <div class="sidebar">
-            <div class="user-section">
-                <h2>Sarah Johnson</h2>
-                <div class="user-badge">
-                    <span>🌿</span> member since 2024 • Forest Rewards Member
-                </div>
+    <div class="container">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Welcome -->
+        <div class="welcome">
+            <h1>Hello, {{ user.full_name }}! 👋</h1>
+            <p>Welcome to your account</p>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="stat-number">{{ past_orders|length }}</div>
+                <div class="stat-label">Total Orders</div>
             </div>
-            <div class="nav-menu">
-                <label for="toggle-past" class="nav-item active">
-                    <i>📋</i> Past Orders
-                </label>
-                <label for="toggle-upcoming" class="nav-item">
-                    <i>⏳</i> Upcoming Orders
-                </label>
-                <label for="toggle-loyalty" class="nav-item">
-                    <i>⭐</i> Loyalty Stamps
-                </label>
-                <label for="toggle-edit" class="nav-item">
-                    <i>✏️</i> Edit Account
-                </label>
+            <div class="stat-box">
+                <div class="stat-number">${{ "%.2f"|format(past_orders|sum(attribute='total')) }}</div>
+                <div class="stat-label">Total Spent</div>
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Past Orders Section -->
-            <div id="past-section" class="section">
-                <h2 class="section-title">🌿 Past Orders</h2>
-                
-                <div class="stats-container">
-                    <div class="stat-card">
-                        <div class="stat-number">12</div>
-                        <div class="stat-label">Total Orders</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">$486.50</div>
-                        <div class="stat-label">Total Spent</div>
-                    </div>
-                </div>
-
-                <div class="orders-grid">
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2398</span>
-                            <span class="order-date">March 29, 2026</span>
-                        </div>
-                        <div class="order-items">Forest Mushroom Soup • Artisan Bread • Elderflower Spritz</div>
-                        <div class="order-footer">
-                            <span class="order-status status-delivered">Delivered</span>
-                            <span class="order-total">$38.50</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2392</span>
-                            <span class="order-date">March 28, 2026</span>
-                        </div>
-                        <div class="order-items">Forest Veggie Burger • Sweet Potato Fries • Kombucha</div>
-                        <div class="order-footer">
-                            <span class="order-status status-delivered">Delivered</span>
-                            <span class="order-total">$32.25</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2385</span>
-                            <span class="order-date">March 27, 2026</span>
-                        </div>
-                        <div class="order-items">Wild Mushroom Pizza • Forest Greens Salad • Herbal Tea</div>
-                        <div class="order-footer">
-                            <span class="order-status status-delivered">Delivered</span>
-                            <span class="order-total">$41.75</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2379</span>
-                            <span class="order-date">March 25, 2026</span>
-                        </div>
-                        <div class="order-items">Grilled Trout • Wild Rice • Seasonal Greens • Sparkling Water</div>
-                        <div class="order-footer">
-                            <span class="order-status status-delivered">Delivered</span>
-                            <span class="order-total">$55.20</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2371</span>
-                            <span class="order-date">March 22, 2026</span>
-                        </div>
-                        <div class="order-items">Forest Harvest Bowl • Maple Glazed Carrots • Kombucha (2)</div>
-                        <div class="order-footer">
-                            <span class="order-status status-delivered">Delivered</span>
-                            <span class="order-total">$44.50</span>
-                        </div>
-                    </div>
-                </div>
+        <!-- Personal Info -->
+        <div class="card">
+            <h3>📋 Personal Information</h3>
+            <div class="info-row">
+                <div class="info-label">Name:</div>
+                <div class="info-value">{{ user.full_name }}</div>
             </div>
-
-            <!-- Upcoming Orders Section -->
-            <div id="upcoming-section" class="section">
-                <h2 class="section-title">⏳ Upcoming Orders</h2>
-                
-                <div class="orders-grid">
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2403</span>
-                            <span class="order-date">April 2, 2026 • 7:00 PM</span>
-                        </div>
-                        <div class="order-items">Wild Mushroom Risotto (2) • Forest Salad • Herb Bread</div>
-                        <div class="order-footer">
-                            <span class="order-status status-confirmed">Confirmed</span>
-                            <span class="order-total">$67.50</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2408</span>
-                            <span class="order-date">April 5, 2026 • 8:30 PM</span>
-                        </div>
-                        <div class="order-items">Forest Platter (for 2) • Craft Beer Flight • Seasonal Dessert</div>
-                        <div class="order-footer">
-                            <span class="order-status status-confirmed">Confirmed</span>
-                            <span class="order-total">$89.99</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2412</span>
-                            <span class="order-date">April 8, 2026 • 6:45 PM</span>
-                        </div>
-                        <div class="order-items">Herb-Crusted Salmon • Wild Rice • Roasted Asparagus</div>
-                        <div class="order-footer">
-                            <span class="order-status status-pending">Pending</span>
-                            <span class="order-total">$48.75</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2415</span>
-                            <span class="order-date">April 12, 2026 • 7:30 PM</span>
-                        </div>
-                        <div class="order-items">Forest Birthday Feast (for 4) • Custom Cake • Sparkling Elderflower</div>
-                        <div class="order-footer">
-                            <span class="order-status status-confirmed">Confirmed</span>
-                            <span class="order-total">$124.99</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="info-note">
-                    🌲 <strong>Reminder:</strong> You can modify or cancel upcoming orders up to 2 hours before the scheduled time.
-                </div>
+            <div class="info-row">
+                <div class="info-label">Username:</div>
+                <div class="info-value">{{ user.username }}</div>
             </div>
-
-            <!-- Loyalty Stamps Section -->
-            <div id="loyalty-section" class="section">
-                <h2 class="section-title">⭐ Loyalty Stamps</h2>
-                
-                <div class="loyalty-section">
-                    <div class="stamps-container">
-                        <div class="stamp-card">
-                            <span class="stamp-icon">🌿</span>
-                            <span class="stamp-count">7 / 10</span>
-                        </div>
-                        <div class="progress-message">
-                            🎉 Only 3 more stamps until your next free reward!
-                        </div>
-                    </div>
-
-                    <div class="stamps-grid">
-                        <div class="stamp earned"></div>
-                        <div class="stamp earned"></div>
-                        <div class="stamp earned"></div>
-                        <div class="stamp earned"></div>
-                        <div class="stamp earned"></div>
-                        <div class="stamp earned"></div>
-                        <div class="stamp earned"></div>
-                        <div class="stamp"></div>
-                        <div class="stamp"></div>
-                        <div class="stamp"></div>
-                    </div>
-
-                    <button class="btn-primary">+ Add Stamp (Simulate Purchase)</button>
-
-                    <hr>
-
-                    <div class="info-note">
-                        <strong>✨ Forest Rewards Program:</strong> Earn 1 stamp for every $15 spent. Collect 10 stamps to get a free meal (up to $25 value) from our Forest Menu!
-                    </div>
-
-                    <div class="info-note" style="background: #e8f0e6; border-left-color: #c97e5a;">
-                        <strong>🎁 Your progress:</strong> 7 stamps collected • Need 3 more for free reward • Last stamp earned: March 29, 2026
-                    </div>
-                </div>
+            <div class="info-row">
+                <div class="info-label">Email:</div>
+                <div class="info-value">{{ user.email or 'Not provided' }}</div>
             </div>
+            <div class="info-row">
+                <div class="info-label">Phone:</div>
+                <div class="info-value">{{ user.phone or 'Not provided' }}</div>
+            </div>
+        </div>
 
-            <!-- Edit Account Section -->
-            <div id="edit-section" class="section">
-                <h2 class="section-title">✏️ Edit Account</h2>
-                
-                <form class="edit-form">
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" value="Sarah Johnson" placeholder="Enter full name">
-                    </div>
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" value="sarah.johnson" placeholder="Enter username">
-                    </div>
-                    <div class="form-group">
-                        <label>Email Address</label>
-                        <input type="email" value="sarah.johnson@example.com" placeholder="Enter email">
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" value="+1 (555) 123-4567" placeholder="Enter phone number">
-                    </div>
-                    <div class="form-group">
-                        <label>Delivery Address</label>
-                        <input type="text" value="123 Forest Lane, Apt 4B, Portland, OR 97201" placeholder="Enter address">
-                    </div>
-                    <div class="form-group">
-                        <label>Preferred Contact Method</label>
-                        <select>
-                            <option>Email</option>
-                            <option selected>Text Message</option>
-                            <option>Phone Call</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Dietary Preferences</label>
-                        <select>
-                            <option>None</option>
-                            <option>Vegetarian</option>
-                            <option selected>Vegan</option>
-                            <option>Gluten-Free</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" value="········" placeholder="Leave blank to keep current">
-                    </div>
-                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <button type="submit" class="btn-primary">Save Changes</button>
-                        <button type="button" class="btn-secondary">Cancel</button>
-                    </div>
-                </form>
+        <!-- Address -->
+        <div class="card">
+            <h3>📍 Delivery Address</h3>
+            <div class="info-row">
+                <div class="info-label">Address:</div>
+                <div class="info-value">{{ user.address or 'No address saved' }}</div>
+            </div>
+        </div>
 
-                <hr>
-
-                <div class="info-note">
-                    <strong>💡 Forest Tip:</strong> Your loyalty stamps and order history are automatically saved. Update your preferences to receive personalized Forest Menu recommendations!
+        <!-- Past Orders -->
+        <div class="card">
+            <h3>📦 Past Orders</h3>
+            {% if past_orders %}
+                <div class="orders-list">
+                    {% for order in past_orders %}
+                    <div class="order-item">
+                        <div class="order-header">
+                            <span class="order-id">{{ order.order_number }}</span>
+                            <span class="order-date">{{ order.order_date }}</span>
+                        </div>
+                        <div class="order-items">{{ order.items }}</div>
+                        <div class="order-footer">
+                            <span class="order-status status-delivered">Delivered</span>
+                            <span class="order-total">${{ "%.2f"|format(order.total) }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
+            {% else %}
+                <div class="empty-orders">
+                    🌱 No past orders yet. Start ordering to see your history!
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Membership -->
+        <div class="card">
+            <h3>⭐ Membership</h3>
+            <div class="info-row">
+                <div class="info-label">Member since:</div>
+                <div class="info-value">{{ user.created_at.split()[0] if user.created_at else '2024' }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Status:</div>
+                <div class="info-value">Active ✅</div>
             </div>
         </div>
     </div>
-</div>
+
+    <footer class="footer">
+        <p>🌲 Forest Grove • Farm-to-table • Organic • Sustainable</p>
+        <p>© 2024 Forest Grove</p>
+    </footer>
 </body>
 </html>
