@@ -1,99 +1,203 @@
-from flask import Flask, render_template, request, redirect, session
-import sqlite3 as sql
+=from flask import Flask, render_template, request, redirect, url_for, session, flash
+from functools import wraps
+import sqlite3
+import hashlib
+import re
 
- ## Create App ##
 app = Flask(__name__)
-app.secret_key = "secret123"
+app.secret_key = 'forest-grove-secret-key-2024'  # Change this in production
 
-## Create app Routes 
-@app.route("/")
-def Home():
-    return render_template("index.html")
+DATABASE = 'greenfield.db'
 
-@app.route("/Login", methods=["GET", "POST"])
-def Login():
-    if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
+def get_db():
+    """Get database connection"""
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def init_db():
+    """Initialize database with users table"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    # Create users table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL,
+            full_name TEXT NOT NULL,
+            email TEXT,
+            phone TEXT,
+            address TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
+    conn.commit()
+    conn.close()
+    print("✅ Database 'greenfield.db' initialized successfully!")
+
+def hash_password(password):
+    """Hash password using SHA256"""
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def login_required(f):
+    """Decorator to require login for protected routes"""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            flash('Please login to access your account', 'error')
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+@app.route('/')
+def index():
+    """Home page - redirect to login or account"""
+    if 'user_id' in session:
+        return redirect(url_for('account'))
+    return redirect(url_for('login'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """User login page"""
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '')
         
-        conn = sql.connect('your_database.db')
-        conn.row_factory = sql.Row
+        if not username or not password:
+            flash('Please enter both username and password', 'error')
+            return render_template('login.html')
+        
+        conn = get_db()
         cursor = conn.cursor()
         
-        # Get user by email
-        cursor.execute("SELECT * FROM Member WHERE Email = ?", (email,))
-        member = cursor.fetchone()
+        # Hash the password and check against database
+        hashed_pw = hash_password(password)
+        user = cursor.execute(
+            'SELECT * FROM users WHERE username = ? AND password = ?',
+            (username, hashed_pw)
+        ).fetchone()
+        
         conn.close()
         
-        # Direct password comparison (NO hashing)
-        if member and member['Password'] == password:  # Plain text comparison
-            # Store user info in session
-            session['member_id'] = member['MemID']
-            session['first_name'] = member['First Name']
-            session['last_name'] = member['Last_Name']
-            session['email'] = member['Email']
-            
-            return "Welcome Admin!"  # Or redirect to dashboard
+        if user:
+            session['user_id'] = user['id']
+            session['username'] = user['username']
+            session['full_name'] = user['full_name']
+            flash(f'✨ Welcome back, {user["full_name"]}!', 'success')
+            return redirect(url_for('account'))
         else:
-            return render_template("login.html", error="Invalid email or password")
+            flash('❌ Invalid username or password', 'error')
     
-    return render_template("login.html")
-    
+    return render_template('login.html')
 
-@app.route("/CreateAccount", methods=["GET", "POST"])
-def CreateAccount():
-    if request.method == "POST":
-        # Get form data
-        first_name = request.form.get("first_name")
-        last_name = request.form.get("last_name")
-        email = request.form.get("email")
-        password = request.form.get("password")
-        confirm_password = request.form.get("confirm_password")
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    """User registration page"""
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '')
+        confirm_password = request.form.get('confirm_password', '')
+        full_name = request.form.get('full_name', '').strip()
+        email = request.form.get('email', '').strip()
+        phone = request.form.get('phone', '').strip()
+        address = request.form.get('address', '').strip()
         
-        # Basic validation
-        if not first_name or not last_name or not email or not password:
-            return render_template("create_account.html", error="All fields are required!")
+        # Validation
+        errors = []
+        
+        if not username:
+            errors.append('Username is required')
+        elif len(username) < 3:
+            errors.append('Username must be at least 3 characters')
+        elif not re.match(r'^[a-zA-Z0-9_]+$', username):
+            errors.append('Username can only contain letters, numbers, and underscores')
+        
+        if not password:
+            errors.append('Password is required')
+        elif len(password) < 4:
+            errors.append('Password must be at least 4 characters')
         
         if password != confirm_password:
-            return render_template("create_account.html", error="Passwords do not match!")
+            errors.append('Passwords do not match')
         
+        if not full_name:
+            errors.append('Full name is required')
+        
+        if email and not re.match(r'^[^@]+@[^@]+\.[^@]+$', email):
+            errors.append('Please enter a valid email address')
+        
+        if errors:
+            for error in errors:
+                flash(error, 'error')
+            return render_template('login.html', show_signup=True, 
+                                 username=username, full_name=full_name, 
+                                 email=email, phone=phone, address=address)
+        
+        # Check if username already exists
+        conn = get_db()
+        cursor = conn.cursor()
+        existing_user = cursor.execute('SELECT id FROM users WHERE username = ?', (username,)).fetchone()
+        
+        if existing_user:
+            conn.close()
+            flash('❌ Username already exists. Please choose another one.', 'error')
+            return render_template('login.html', show_signup=True,
+                                 username=username, full_name=full_name, 
+                                 email=email, phone=phone, address=address)
+        
+        # Create new user
         try:
-            # Connect to database
-            conn = sql.connect('your_database.db')
-            cursor = conn.cursor()
-            
-            # Insert new member with PLAIN TEXT password (NOT recommended for production!)
-            cursor.execute("""
-                INSERT INTO Member ("First Name", Last_Name, Email, Password) 
-                VALUES (?, ?, ?, ?)
-            """, (first_name, last_name, email, password))  # Password stored as-is
-            
+            hashed_pw = hash_password(password)
+            cursor.execute('''
+                INSERT INTO users (username, password, full_name, email, phone, address) 
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (username, hashed_pw, full_name, email, phone, address))
             conn.commit()
+            
+            # Get the newly created user
+            user = cursor.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
             conn.close()
             
-            # Redirect to login page with success message
-            return render_template("login.html", success="Account created successfully! Please login.")
+            # Log the user in automatically
+            session['user_id'] = user['id']
+            session['username'] = user['username']
+            session['full_name'] = user['full_name']
             
-        except sql.IntegrityError:
-            return render_template("create_account.html", error="Email already registered!")
+            flash(f'🎉 Account created successfully! Welcome to Forest Grove, {full_name}!', 'success')
+            return redirect(url_for('account'))
+            
         except Exception as e:
-            return render_template("create_account.html", error=f"An error occurred: {str(e)}")
+            conn.close()
+            flash('An error occurred. Please try again.', 'error')
+            return render_template('login.html', show_signup=True,
+                                 username=username, full_name=full_name, 
+                                 email=email, phone=phone, address=address)
     
-    # GET request - show the create account form
-    return render_template("create_account.html")
+    # GET request - show signup form
+    return render_template('login.html', show_signup=True)
+
+@app.route('/account')
+@login_required
+def account():
+    """User account dashboard - protected page"""
+    conn = get_db()
+    cursor = conn.cursor()
+    user = cursor.execute('SELECT * FROM users WHERE id = ?', (session['user_id'],)).fetchone()
+    conn.close()
     
+    return render_template('account.html', user=user)
 
-@app.route("/Fitness_Center")
-def Fitness_Center():
-    return render_template("Fitness_Center.html")
+@app.route('/logout')
+def logout():
+    """Logout user"""
+    session.clear()
+    flash('👋 You have been logged out successfully', 'success')
+    return redirect(url_for('login'))
 
-@app.route("/Membership")
-def Membership():
-    return render_template("Membership.html")
-
-@app.route("/Room_Hire")
-def Room_Hire():
-    return render_template("Room_Hire.html")
-
-if __name__ == "__main__":
-    app.run(debug=True)
+# Initialize database when app starts
+if __name__ == '__main__':
+    init_db()
+    app.run(debug=True, port=5000)
