@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Dashboard | Forest Grove</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <title>Business | Forest Grove</title>
     <style>
         * {
             margin: 0;
@@ -13,879 +12,269 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: #e8f0e6;
             color: #1e3a2f;
-            line-height: 1.4;
-            padding: 2rem;
         }
 
-        /* Main container */
-        .dashboard-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 32px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-        }
-
-        /* Dashboard Layout */
-        .dashboard {
+        /* Navbar */
+        .navbar {
+            background: #1e4a3a;
+            padding: 1rem 2rem;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
-            min-height: 100vh;
+            gap: 1rem;
         }
 
-        /* Sidebar - Left column (Forest theme) */
-        .sidebar {
-            flex: 1;
-            min-width: 280px;
-            background: linear-gradient(135deg, #1e4a3a 0%, #0f3b2c 100%);
-            padding: 2rem 1.5rem;
-            color: #ffffff;
-        }
-
-        /* Business Name Section */
-        .business-section {
-            margin-bottom: 2.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .business-section h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.5px;
-            color: #ffffff;
-        }
-
-        .business-badge {
-            font-size: 0.85rem;
-            color: #b8dfc6;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 0.5rem;
-        }
-
-        /* Navigation Menu */
-        .nav-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0.9rem 1.2rem;
-            border-radius: 16px;
-            font-weight: 500;
-            color: #e0f0e6;
-            transition: 0.2s;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            width: 100%;
-            text-align: left;
-            font-size: 1rem;
-            font-family: inherit;
-        }
-
-        .nav-item i {
-            font-style: normal;
-            font-weight: 500;
-            font-size: 1.2rem;
-            width: 28px;
-        }
-
-        .nav-item.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
+        .logo {
+            color: white;
+            font-size: 1.3rem;
             font-weight: 600;
         }
 
-        .nav-item:not(.active):hover {
-            background: rgba(255, 255, 255, 0.08);
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
         }
 
         /* Main Content */
-        .main-content {
-            flex: 3;
-            background: #fafef7;
-            padding: 2rem 2.5rem;
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
         }
 
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.3px;
-            border-left: 5px solid #2e7d64;
-            padding-left: 1rem;
-            color: #1e3a2f;
-        }
-
-        /* Stats Cards */
-        .stats-container {
+        /* Stats Row */
+        .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .stat-card {
-            background: linear-gradient(135deg, #2e7d64 0%, #236b54 100%);
-            padding: 1.8rem;
-            border-radius: 24px;
-            color: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .stat-card.high {
-            background: linear-gradient(135deg, #3d8f6e 0%, #2a7a5c 100%);
-        }
-
-        .stat-card.low {
-            background: linear-gradient(135deg, #c97e5a 0%, #b86a44 100%);
+        .stat-box {
+            background: white;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #d4e4dc;
         }
 
         .stat-number {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2e7d64;
         }
 
         .stat-label {
-            font-size: 0.95rem;
-            opacity: 0.95;
-            font-weight: 500;
+            font-size: 0.8rem;
+            color: #7f9e8f;
+            margin-top: 0.2rem;
         }
 
-        /* Inventory Table */
-        .inventory-table {
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #d4e4dc;
+        }
+
+        .card h3 {
+            color: #2e7d64;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2efe8;
+        }
+
+        /* Tables */
+        .table-wrapper {
             overflow-x: auto;
-            margin-top: 1rem;
-            border-radius: 20px;
-            border: 1px solid #e2efe8;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            font-size: 0.85rem;
         }
 
         th, td {
-            padding: 1rem;
+            padding: 0.6rem;
             text-align: left;
             border-bottom: 1px solid #e2efe8;
         }
 
         th {
-            background: #eef7f2;
+            background: #f0f7f3;
             font-weight: 600;
-            color: #1e5a48;
         }
 
         tr:hover {
-            background: #f9fff9;
+            background: #fafef7;
         }
 
-        .low-stock {
-            color: #d1693a;
-            font-weight: 600;
-        }
-
-        .in-stock {
-            color: #2e7d64;
-            font-weight: 500;
-        }
-
-        .stock-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .stock-badge.low {
-            background: #fee9e0;
+        .low {
             color: #c97e5a;
-        }
-
-        .stock-badge.ok {
-            background: #e0f5ee;
-            color: #2e7d64;
-        }
-
-        /* Order Cards */
-        .orders-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .order-card {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 1.2rem 1.5rem;
-            border: 1px solid #e2efe8;
-            transition: 0.2s;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-        }
-
-        .order-card:hover {
-            border-color: #c8e0d4;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-        }
-
-        .order-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.75rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .order-id {
-            font-weight: 700;
-            color: #2e7d64;
-            font-size: 1rem;
-        }
-
-        .order-date {
-            color: #7f9e8f;
-            font-size: 0.85rem;
-        }
-
-        .order-detail {
-            margin: 0.5rem 0;
-            color: #4a6b5e;
-            font-size: 0.9rem;
-        }
-
-        .order-detail strong {
-            color: #1e3a2f;
             font-weight: 600;
         }
 
-        .order-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 0.75rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .order-status {
+        .badge {
             display: inline-block;
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
             font-weight: 600;
         }
 
-        .status-delivered {
+        .badge.ready {
             background: #e0f5ee;
             color: #2e7d64;
         }
 
-        .status-in-progress {
+        .badge.pending {
             background: #fff0e5;
             color: #c97e5a;
         }
 
-        .status-pending {
-            background: #fee9e6;
-            color: #c95a4a;
-        }
-
-        .status-preparing {
-            background: #e5f0ff;
-            color: #5a7e9e;
-        }
-
-        .status-confirmed {
+        .badge.done {
             background: #e8f0e6;
             color: #4a8b6e;
         }
 
-        .order-total {
-            font-weight: 700;
-            color: #1e5a48;
-            font-size: 1rem;
-        }
-
-        /* Manage Stock Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-action {
-            background: #f0f7f3;
-            border: 1px solid #c8e0d4;
-            padding: 0.7rem 1.5rem;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #1e5a48;
-            cursor: pointer;
-            transition: 0.2s;
-            font-family: inherit;
-        }
-
-        .btn-action:hover {
-            background: #e2efe8;
-            border-color: #9ec0ae;
-        }
-
-        .btn-action.primary {
-            background: #2e7d64;
-            border-color: #2e7d64;
-            color: white;
-        }
-
-        .btn-action.primary:hover {
-            background: #236b54;
-        }
-
-        .action-icons {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .icon-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.3rem 0.6rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-family: inherit;
-            transition: 0.2s;
-        }
-
-        .icon-btn.edit {
-            color: #2e7d64;
-        }
-
-        .icon-btn.edit:hover {
-            background: #e0f5ee;
-        }
-
-        .icon-btn.remove {
-            color: #c97e5a;
-        }
-
-        .icon-btn.remove:hover {
-            background: #fee9e0;
-        }
-
-        /* Divider */
-        .divider {
-            height: 1px;
-            background: #e2efe8;
-            margin: 2rem 0;
-        }
-
-        /* Section visibility (CSS-only tabs) */
-        .section-toggle {
-            display: none;
-        }
-
-        .section {
-            display: none;
-        }
-
-        #toggle-stock:checked ~ .dashboard #stock-section,
-        #toggle-orders:checked ~ .dashboard #orders-section,
-        #toggle-past-orders:checked ~ .dashboard #past-orders-section,
-        #toggle-manage:checked ~ .dashboard #manage-section {
-            display: block;
-        }
-
-        #toggle-stock:checked ~ .dashboard .sidebar label[for="toggle-stock"],
-        #toggle-orders:checked ~ .dashboard .sidebar label[for="toggle-orders"],
-        #toggle-past-orders:checked ~ .dashboard .sidebar label[for="toggle-past-orders"],
-        #toggle-manage:checked ~ .dashboard .sidebar label[for="toggle-manage"] {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        .sidebar .nav-item {
-            cursor: pointer;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-            .dashboard {
-                flex-direction: column;
-            }
-            .main-content {
-                padding: 1.5rem;
-            }
-            .stats-container {
-                grid-template-columns: 1fr;
-            }
-            .section-title {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* Empty state styling */
-        .empty-state {
+        /* Footer */
+        .footer {
             text-align: center;
-            padding: 3rem;
+            padding: 1.5rem;
             color: #9ec0ae;
-            font-size: 0.95rem;
+            font-size: 0.75rem;
+            border-top: 1px solid #d4e4dc;
+            margin-top: 2rem;
         }
 
-        /* Info note */
-        .info-note {
-            background: #f0f7f3;
-            padding: 1rem;
-            border-radius: 16px;
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
-            color: #4a8b6e;
-            border-left: 3px solid #2e7d64;
+        @media (max-width: 700px) {
+            th, td {
+                font-size: 0.75rem;
+                padding: 0.4rem;
+            }
         }
     </style>
 </head>
 <body>
-<div class="dashboard-container">
-    <!-- Hidden radio buttons for CSS-only tab switching -->
-    <input type="radio" name="section" id="toggle-stock" class="section-toggle" checked>
-    <input type="radio" name="section" id="toggle-orders" class="section-toggle">
-    <input type="radio" name="section" id="toggle-past-orders" class="section-toggle">
-    <input type="radio" name="section" id="toggle-manage" class="section-toggle">
+    <nav class="navbar">
+        <div class="logo">🌿 Forest Grove • Business</div>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </nav>
 
-    <div class="dashboard">
-        <!-- Sidebar - Forest Theme -->
-        <div class="sidebar">
-            <div class="business-section">
-                <h1>Forest Grove</h1>
-                <div class="business-badge">
-                    <span>🌿</span> Organic • Sustainable • Local
-                </div>
+    <div class="container">
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number">{{ inventory|length }}</div>
+                <div class="stat-label">Total Items</div>
             </div>
-            <div class="nav-menu">
-                <label for="toggle-stock" class="nav-item active">
-                    <i>📊</i> Stock Levels
-                </label>
-                <label for="toggle-orders" class="nav-item">
-                    <i>📋</i> Orders
-                </label>
-                <label for="toggle-past-orders" class="nav-item">
-                    <i>✅</i> Past Orders
-                </label>
-                <label for="toggle-manage" class="nav-item">
-                    <i>⚙️</i> Manage Stock
-                </label>
+            <div class="stat-box">
+                <div class="stat-number">{{ active_orders|length }}</div>
+                <div class="stat-label">Active Orders</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">{{ completed_orders|length }}</div>
+                <div class="stat-label">Completed Orders</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">{{ low_stock_count }}</div>
+                <div class="stat-label">Low Stock</div>
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Stock Levels Section -->
-            <div id="stock-section" class="section">
-                <h2 class="section-title">🌿 Stock Levels</h2>
-                
-                <div class="stats-container">
-                    <div class="stat-card high">
-                        <div class="stat-number">24</div>
-                        <div class="stat-label">High Stock Items</div>
-                        <div style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.85;">✓ Well stocked</div>
-                    </div>
-                    <div class="stat-card low">
-                        <div class="stat-number">8</div>
-                        <div class="stat-label">Low Stock Items</div>
-                        <div style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.85;">⚠️ Need restock soon</div>
-                    </div>
-                </div>
-
-                <div class="inventory-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Category</th>
-                                <th>Quantity</th>
-                                <th>Unit</th>
-                                <th>Reorder Level</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Organic Kale</td>
-                                <td>Vegetables</td>
-                                <td class="low-stock">8</td>
-                                <td>bunches</td>
-                                <td>15</td>
-                                <td>$3.99</td>
-                                <td><span class="stock-badge low">⚠️ Low Stock</span></td>
-                            </tr>
-                            <tr>
-                                <td>Wild Mushrooms</td>
-                                <td>Mushrooms</td>
-                                <td class="low-stock">12</td>
-                                <td>lbs</td>
-                                <td>20</td>
-                                <td>$8.99</td>
-                                <td><span class="stock-badge low">⚠️ Low Stock</span></td>
-                            </tr>
-                            <tr>
-                                <td>Heirloom Tomatoes</td>
-                                <td>Vegetables</td>
-                                <td>45</td>
-                                <td>lbs</td>
-                                <td>20</td>
-                                <td>$4.50</td>
-                                <td><span class="stock-badge ok">✓ In Stock</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fresh Rosemary</td>
-                                <td>Herbs</td>
-                                <td class="low-stock">6</td>
-                                <td>bunches</td>
-                                <td>10</td>
-                                <td>$2.99</td>
-                                <td><span class="stock-badge low">⚠️ Low Stock</span></td>
-                            </tr>
-                            <tr>
-                                <td>Forest Honey</td>
-                                <td>Pantry</td>
-                                <td>32</td>
-                                <td>jars</td>
-                                <td>15</td>
-                                <td>$12.99</td>
-                                <td><span class="stock-badge ok">✓ In Stock</span></td>
-                            </tr>
-                            <tr>
-                                <td>Artisan Bread</td>
-                                <td>Bakery</td>
-                                <td class="low-stock">4</td>
-                                <td>loaves</td>
-                                <td>10</td>
-                                <td>$5.99</td>
-                                <td><span class="stock-badge low">⚠️ Low Stock</span></td>
-                            </tr>
-                            <tr>
-                                <td>Wild Rice Blend</td>
-                                <td>Grains</td>
-                                <td>28</td>
-                                <td>lbs</td>
-                                <td>15</td>
-                                <td>$6.50</td>
-                                <td><span class="stock-badge ok">✓ In Stock</span></td>
-                            </tr>
-                            <tr>
-                                <td>Maple Syrup</td>
-                                <td>Pantry</td>
-                                <td>18</td>
-                                <td>bottles</td>
-                                <td>12</td>
-                                <td>$14.99</td>
-                                <td><span class="stock-badge ok">✓ In Stock</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fresh Thyme</td>
-                                <td>Herbs</td>
-                                <td class="low-stock">3</td>
-                                <td>bunches</td>
-                                <td>10</td>
-                                <td>$2.99</td>
-                                <td><span class="stock-badge low">⚠️ Low Stock</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="info-note">
-                    🌱 <strong>Forest Tip:</strong> Low stock items are highlighted in orange. Restock soon to maintain fresh inventory!
-                </div>
+        <!-- Inventory -->
+        <div class="card">
+            <h3>📦 Current Inventory</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Product</th><th>Qty</th><th>Unit</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for item in inventory %}
+                        <tr>
+                            <td>{{ item.product }}</td>
+                            <td class="{% if item.quantity < item.reorder_level %}low{% endif %}">{{ item.quantity }}</td>
+                            <td>{{ item.unit }}</td>
+                            <td>
+                                {% if item.quantity < item.reorder_level %}
+                                    <span class="badge pending">⚠️ Low</span>
+                                {% else %}
+                                    <span class="badge ready">✓ In Stock</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
+        </div>
 
-            <!-- Active Orders Section -->
-            <div id="orders-section" class="section">
-                <h2 class="section-title">📋 Active Orders</h2>
-                
-                <div class="orders-grid">
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2403</span>
-                            <span class="order-date">March 30, 2026 • 6:30 PM</span>
-                        </div>
-                        <div class="order-detail"><strong>Customer:</strong> Sarah Johnson</div>
-                        <div class="order-detail"><strong>Items:</strong> Wild Mushroom Risotto (2) • Forest Salad • Herb Bread</div>
-                        <div class="order-detail"><strong>Total:</strong> $67.50</div>
-                        <div class="order-footer">
-                            <span class="order-status status-in-progress">In Progress</span>
-                            <span class="order-total">⏱️ Est. 25 min</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2405</span>
-                            <span class="order-date">March 30, 2026 • 7:15 PM</span>
-                        </div>
-                        <div class="order-detail"><strong>Customer:</strong> Michael Chen</div>
-                        <div class="order-detail"><strong>Items:</strong> Vegan Forest Bowl • Roasted Vegetables • Kombucha (2)</div>
-                        <div class="order-detail"><strong>Total:</strong> $48.75</div>
-                        <div class="order-footer">
-                            <span class="order-status status-preparing">Preparing</span>
-                            <span class="order-total">⏱️ Est. 15 min</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2407</span>
-                            <span class="order-date">March 30, 2026 • 8:00 PM</span>
-                        </div>
-                        <div class="order-detail"><strong>Customer:</strong> Emma Thompson</div>
-                        <div class="order-detail"><strong>Items:</strong> Grilled Trout • Wild Rice • Seasonal Greens</div>
-                        <div class="order-detail"><strong>Total:</strong> $42.25</div>
-                        <div class="order-footer">
-                            <span class="order-status status-pending">Pending</span>
-                            <span class="order-total">⏱️ Waiting confirmation</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2408</span>
-                            <span class="order-date">March 30, 2026 • 8:30 PM</span>
-                        </div>
-                        <div class="order-detail"><strong>Customer:</strong> David Wilson</div>
-                        <div class="order-detail"><strong>Items:</strong> Forest Platter (for 2) • Craft Beer Flight</div>
-                        <div class="order-detail"><strong>Total:</strong> $89.99</div>
-                        <div class="order-footer">
-                            <span class="order-status status-confirmed">Confirmed</span>
-                            <span class="order-total">⏱️ Est. 40 min</span>
-                        </div>
-                    </div>
-                </div>
+        <!-- Active Orders -->
+        <div class="card">
+            <h3>🔄 Active Orders</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Order #</th><th>Customer</th><th>Items</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for order in active_orders %}
+                        <tr>
+                            <td>{{ order.order_number }}</td>
+                            <td>{{ order.customer_name }}</td>
+                            <td>{{ order.items|truncate(30) }}</td>
+                            <td><span class="badge ready">{{ order.status }}</span></td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="4" style="text-align: center; color: #9ec0ae;">No active orders</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
+        </div>
 
-            <!-- Past Orders Section -->
-            <div id="past-orders-section" class="section">
-                <h2 class="section-title">✅ Completed Orders</h2>
-                
-                <div class="orders-grid">
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2398</span>
-                            <span class="order-date">March 29, 2026 • 7:00 PM</span>
-                        </div>
-                        <div class="order-detail"><strong>Customer:</strong> Lisa Martinez</div>
-                        <div class="order-detail"><strong>Items:</strong> Forest Mushroom Soup • Artisan Bread • Elderflower Spritz</div>
-                        <div class="order-footer">
-                            <span class="order-status status-delivered">Delivered</span>
-                            <span class="order-total">$38.50</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2395</span>
-                            <span class="order-date">March 29, 2026 • 6:15 PM</span>
-                        </div>
-                        <div class="order-detail"><strong>Customer:</strong> James Parker</div>
-                        <div class="order-detail"><strong>Items:</strong> Herb-Crusted Salmon • Wild Rice • Roasted Asparagus</div>
-                        <div class="order-footer">
-                            <span class="order-status status-delivered">Delivered</span>
-                            <span class="order-total">$55.75</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2392</span>
-                            <span class="order-date">March 28, 2026 • 8:30 PM</span>
-                        </div>
-                        <div class="order-detail"><strong>Customer:</strong> Rachel Green</div>
-                        <div class="order-detail"><strong>Items:</strong> Forest Veggie Burger • Sweet Potato Fries • Kombucha</div>
-                        <div class="order-footer">
-                            <span class="order-status status-delivered">Delivered</span>
-                            <span class="order-total">$32.25</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2389</span>
-                            <span class="order-date">March 28, 2026 • 7:15 PM</span>
-                        </div>
-                        <div class="order-detail"><strong>Customer:</strong> Thomas Blake</div>
-                        <div class="order-detail"><strong>Items:</strong> Forest Harvest Bowl • Maple Glazed Carrots • Herbal Tea</div>
-                        <div class="order-footer">
-                            <span class="order-status status-delivered">Delivered</span>
-                            <span class="order-total">$44.50</span>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#ORD-2385</span>
-                            <span class="order-date">March 27, 2026 • 6:45 PM</span>
-                        </div>
-                        <div class="order-detail"><strong>Customer:</strong> Olivia Chen</div>
-                        <div class="order-detail"><strong>Items:</strong> Wild Mushroom Pizza • Forest Greens Salad</div>
-                        <div class="order-footer">
-                            <span class="order-status status-delivered">Delivered</span>
-                            <span class="order-total">$41.75</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Manage Stock Section -->
-            <div id="manage-section" class="section">
-                <h2 class="section-title">⚙️ Manage Stock</h2>
-                
-                <div class="action-buttons">
-                    <button class="btn-action primary">+ Add New Stock Item</button>
-                    <button class="btn-action">📤 Export Inventory</button>
-                    <button class="btn-action">🔄 Update Prices</button>
-                </div>
-
-                <div class="inventory-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Category</th>
-                                <th>Quantity</th>
-                                <th>Unit</th>
-                                <th>Price</th>
-                                <th>Last Updated</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Organic Kale</td>
-                                <td>Vegetables</td>
-                                <td class="low-stock">8</td>
-                                <td>bunches</td>
-                                <td>$3.99</td>
-                                <td>Mar 28, 2026</td>
-                                <td class="action-icons">
-                                    <button class="icon-btn edit">✏️ Edit</button>
-                                    <button class="icon-btn remove">🗑️ Remove</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Wild Mushrooms</td>
-                                <td>Mushrooms</td>
-                                <td class="low-stock">12</td>
-                                <td>lbs</td>
-                                <td>$8.99</td>
-                                <td>Mar 29, 2026</td>
-                                <td class="action-icons">
-                                    <button class="icon-btn edit">✏️ Edit</button>
-                                    <button class="icon-btn remove">🗑️ Remove</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Heirloom Tomatoes</td>
-                                <td>Vegetables</td>
-                                <td>45</td>
-                                <td>lbs</td>
-                                <td>$4.50</td>
-                                <td>Mar 30, 2026</td>
-                                <td class="action-icons">
-                                    <button class="icon-btn edit">✏️ Edit</button>
-                                    <button class="icon-btn remove">🗑️ Remove</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Fresh Rosemary</td>
-                                <td>Herbs</td>
-                                <td class="low-stock">6</td>
-                                <td>bunches</td>
-                                <td>$2.99</td>
-                                <td>Mar 27, 2026</td>
-                                <td class="action-icons">
-                                    <button class="icon-btn edit">✏️ Edit</button>
-                                    <button class="icon-btn remove">🗑️ Remove</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Forest Honey</td>
-                                <td>Pantry</td>
-                                <td>32</td>
-                                <td>jars</td>
-                                <td>$12.99</td>
-                                <td>Mar 25, 2026</td>
-                                <td class="action-icons">
-                                    <button class="icon-btn edit">✏️ Edit</button>
-                                    <button class="icon-btn remove">🗑️ Remove</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Artisan Bread</td>
-                                <td>Bakery</td>
-                                <td class="low-stock">4</td>
-                                <td>loaves</td>
-                                <td>$5.99</td>
-                                <td>Mar 30, 2026</td>
-                                <td class="action-icons">
-                                    <button class="icon-btn edit">✏️ Edit</button>
-                                    <button class="icon-btn remove">🗑️ Remove</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Wild Rice Blend</td>
-                                <td>Grains</td>
-                                <td>28</td>
-                                <td>lbs</td>
-                                <td>$6.50</td>
-                                <td>Mar 26, 2026</td>
-                                <td class="action-icons">
-                                    <button class="icon-btn edit">✏️ Edit</button>
-                                    <button class="icon-btn remove">🗑️ Remove</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Maple Syrup</td>
-                                <td>Pantry</td>
-                                <td>18</td>
-                                <td>bottles</td>
-                                <td>$14.99</td>
-                                <td>Mar 24, 2026</td>
-                                <td class="action-icons">
-                                    <button class="icon-btn edit">✏️ Edit</button>
-                                    <button class="icon-btn remove">🗑️ Remove</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="info-note">
-                    🌲 <strong>Sustainability Note:</strong> All ingredients are sourced from local farms within 50 miles. Support local!
-                </div>
+        <!-- Past Orders (Completed) -->
+        <div class="card">
+            <h3>✅ Past Orders</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Order #</th><th>Customer</th><th>Items</th><th>Date</th><th>Total</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for order in completed_orders %}
+                        <tr>
+                            <td>{{ order.order_number }}</td>
+                            <td>{{ order.customer_name }}</td>
+                            <td>{{ order.items|truncate(30) }}</td>
+                            <td>{{ order.order_date }}</td>
+                            <td>${{ "%.2f"|format(order.total) }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="5" style="text-align: center; color: #9ec0ae;">No past orders</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
+
+    <footer class="footer">
+        <p>🌲 Forest Grove • Business Dashboard</p>
+        <p>© 2024 Forest Grove</p>
+    </footer>
 </body>
 </html>
